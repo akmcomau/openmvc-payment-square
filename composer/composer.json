@@ -1,0 +1,6 @@
+{
+	"require": {
+		"stripe/stripe-php": "v6.4.1"
+	}
+}
+
