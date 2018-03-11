@@ -27,6 +27,8 @@ class StripeAPI {
 
 	protected $error_msg = NULL;
 
+	protected $last_payment = NULL;
+
 	public function __construct($config, $database, $language, Cart $cart) {
 		$this->module_config = $config->moduleConfig('\modules\payment_stripe');
 		$this->config        = $config;
@@ -43,6 +45,10 @@ class StripeAPI {
 
 	public function getErrorMsg() {
 		return $this->error_msg;
+	}
+
+	public function getLastPayment() {
+		return $this->last_payment;
 	}
 
 	public function chargeCard($customer, $card, $currency, $amount) {
@@ -75,6 +81,8 @@ class StripeAPI {
 		$stripe->stripe_token     = isset($token) ? json_encode($token) : '';
 		$stripe->stripe_charge    = isset($charge) ? json_encode($charge) : '';
 		$stripe->insert();
+
+		$this->last_payment = $stripe;
 
 		if (!isset($charge) || $charge->outcome->network_status != 'approved_by_network') {
 			$data = [

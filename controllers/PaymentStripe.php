@@ -77,8 +77,13 @@ class PaymentStripe extends Controller {
 
 			$checkout = $stripe->chargeCard($logged_in, $card, strtolower($currency), $amount_total);
 			if ($checkout) {
-				// goto the receipt
+				// create the event
+				$this->request->addEvent('Stripe Payment', $stripe->getLastPayment()->id, $cart->getGrandTotal(), $currency);
+
+				// clear the cart
 				$cart->clear();
+
+				// goto the receipt
 				$enc_checkout_id = Encryption::obfuscate($checkout->id, $this->config->siteConfig()->secret);
 				throw new RedirectException($this->url->getUrl('Checkout', 'receipt', [$enc_checkout_id]));
 			}
