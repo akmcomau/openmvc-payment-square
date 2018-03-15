@@ -1,20 +1,20 @@
 <?php
 
-namespace modules\payment_stripe\classes\models;
+namespace modules\payment_square\classes\models;
 
 use core\classes\Model;
 use core\classes\Encryption;
 
-class Stripe extends Model {
-	protected $table       = 'stripe';
-	protected $primary_key = 'stripe_id';
+class Square extends Model {
+	protected $table       = 'square';
+	protected $primary_key = 'square_id';
 	protected $columns     = [
-		'stripe_id' => [
+		'square_id' => [
 			'data_type'      => 'bigint',
 			'auto_increment' => TRUE,
 			'null_allowed'   => FALSE,
 		],
-		'stripe_created' => [
+		'square_created' => [
 			'data_type'      => 'datetime',
 			'null_allowed'   => FALSE,
 		],
@@ -22,35 +22,31 @@ class Stripe extends Model {
 			'data_type'      => 'bigint',
 			'null_allowed'   => TRUE,
 		],
-		'stripe_reference' => [
+		'square_reference' => [
 			'data_type'      => 'text',
 			'data_length'    => 32,
 			'null_allowed'   => TRUE,
 		],
-		'stripe_amount' => [
+		'square_amount' => [
 			'data_type'      => 'numeric',
 			'data_length'    => [6, 4],
 			'null_allowed'   => FALSE,
 		],
-		'stripe_fee' => [
+		'square_fee' => [
 			'data_type'      => 'numeric',
 			'data_length'    => [6, 4],
 			'null_allowed'   => FALSE,
 		],
-		'stripe_token' => [
-			'data_type'      => 'text',
-			'null_allowed'   => FALSE,
-		],
-		'stripe_charge' => [
+		'square_charge' => [
 			'data_type'      => 'text',
 			'null_allowed'   => FALSE,
 		],
 	];
 
 	protected $indexes = [
-		'stripe_created',
+		'square_created',
 		'checkout_id',
-		'stripe_reference',
+		'square_reference',
 	];
 
 	protected $foreign_keys = [

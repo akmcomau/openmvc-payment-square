@@ -1,16 +1,16 @@
 <?php
 $_MODULE = [
-	"name" => "Payment - Stripe",
-	"description" => "Support for Stripe payments within the checkout",
-	"namespace" => "\\modules\\payment_stripe",
-	"config_controller" => "administrator\\PaymentStripe",
+	"name" => "Payment - Square",
+	"description" => "Support for Square payments within the checkout",
+	"namespace" => "\\modules\\payment_square",
+	"config_controller" => "administrator\\PaymentSquare",
 	"controllers" => [
-		"administrator\\PaymentStripe",
-		"PaymentStripe"
+		"administrator\\PaymentSquare",
+		"PaymentSquare"
 	],
 	"default_config" => [
 		"currency" => "AUD",
-		"published_key" => "",
-		"secret_key" => "",
+		"application_id" => "",
+		"access_token" => "",
 	]
 ];

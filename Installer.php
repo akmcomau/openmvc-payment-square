@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\payment_stripe;
+namespace modules\payment_square;
 
 use ErrorException;
 use core\classes\Config;
@@ -20,7 +20,7 @@ class Installer {
 
 	public function install() {
 		$model = new Model($this->config, $this->database);
-		$table = $model->getModel('\\modules\\payment_stripe\\classes\\models\\Stripe');
+		$table = $model->getModel('\\modules\\payment_square\\classes\\models\\Square');
 		$table->createTable();
 		$table->createIndexes();
 		$table->createForeignKeys();
@@ -28,23 +28,23 @@ class Installer {
 
 	public function uninstall() {
 		$model = new Model($this->config, $this->database);
-		$table = $model->getModel('\\modules\\payment_stripe\\classes\\models\\Stripe');
+		$table = $model->getModel('\\modules\\payment_square\\classes\\models\\Square');
 		$table->dropTable();
 	}
 
 	public function enable() {
 		$config = $this->config->getSiteConfig();
-		$config['sites'][$this->config->getSiteDomain()]['checkout']['payment_methods']['stripe'] = [
-			'name' => 'Stripe',
-			'public' => '\modules\payment_stripe\controllers\PaymentStripe',
-			'administrator' => '\modules\payment_stripe\controllers\administrator\PaymentStripe',
+		$config['sites'][$this->config->getSiteDomain()]['checkout']['payment_methods']['square'] = [
+			'name' => 'Square',
+			'public' => '\modules\payment_square\controllers\PaymentSquare',
+			'administrator' => '\modules\payment_square\controllers\administrator\PaymentSquare',
 		];
 		$this->config->setSiteConfig($config);
 	}
 
 	public function disable() {
 		$config = $this->config->getSiteConfig();
-		unset($config['sites'][$this->config->getSiteDomain()]['checkout']['payment_methods']['stripe']);
+		unset($config['sites'][$this->config->getSiteDomain()]['checkout']['payment_methods']['square']);
 		$this->config->setSiteConfig($config);
 	}
 }
